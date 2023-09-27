@@ -12,6 +12,7 @@ Assuming the server is running on `localhost:80`. The API is at localhost:80/v1/
 - To get the Val for a Key do: HTTP GET http://localhost:80/v1/kvs with `Key` as a required Header. Returns a json with ```{"result":"Value", "ok":true}``` ok is false if Key is not present. `ok` is true if `Key` is present and `result` will give the value for the given key.
 - To insert a new Key, Val pair do: HTTP PUT http://localhost:80/v1/kvs with `Key` as a required Header. Also add `Val` Header for a not default value. Returns a similar json with `ok` is true if insertion succeeds.
 - To delete a Key do: HTTP DEL http://localhost:80/v1/kvs with `Key` as a required Header.  Returns a similar json with `ok` is true if the Key was present and deletion succeeds or the key was just absent. No error thrown if we delete a key that's not present (for Perf).
+- You can use `thunderclient` VSCODE extension or postman for HTTP requests
 
 ## What's done?
 1. Server Implementation
