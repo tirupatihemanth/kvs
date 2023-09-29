@@ -26,16 +26,23 @@ func main() {
 	configureRoutes(v1Router)
 	router.Mount("/v1", v1Router)
 
+	file, err := os.OpenFile("kvsLog.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0666)
+    if err != nil {
+        log.Fatalln(err)
+    }
+
+    log.SetOutput(file)
+
 	port := os.Getenv("PORT")
 	if port == "" {
 		log.Fatalln("PORT env variable not set. Create a .env file and put `PORT=\"80\"` inside it")
 	}
 
-	log.Printf("Starting Server at port %v\n", port)
-	err := http.ListenAndServe(":"+port, router)
+	log.Println("Starting Server at port", port)
+	err = http.ListenAndServe(":"+port, router)
 
 	if err != nil {
-		log.Fatalf("Error Starting the server at port %v\n", port)
+		log.Fatalln("Error Starting the server at port %v\n", port)
 	}
 }
 

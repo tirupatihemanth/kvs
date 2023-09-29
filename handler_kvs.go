@@ -1,7 +1,9 @@
 package main
 
-import "net/http"
-
+import (
+	"net/http"
+	"fmt"
+)
 type KVResponse struct {
 	Result string `json:"result"`
 	Ok     bool   `json:"ok"`
@@ -14,7 +16,12 @@ func getKeyHandler(w http.ResponseWriter, r *http.Request, key string) {
 }
 
 func putKeyHandler(w http.ResponseWriter, r *http.Request, key string) {
-	val := r.Header.Get("Val")
+	val, ok := get_header(r.Header, "Val")
+	if !ok {
+		respondWithError(w, http.StatusBadRequest, "Please provide a value for the key")
+		return
+	}
+	fmt.Printf(val)
 	kvMap.Put(key, val)
 	respondWithJSON(w, http.StatusOK, KVResponse{"", true})
 }
