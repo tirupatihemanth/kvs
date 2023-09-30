@@ -1,11 +1,14 @@
 package main
 
-import "net/http"
+import (
+	"net/http"
+	"log"
+)
 
 type keyHandler func(w http.ResponseWriter, r *http.Request, key string)
 
-func getKey(headers http.Header) (string, bool) {
-	key := headers.Get("Key")
+func get_header(headers http.Header, header string) (string, bool) {
+	key := headers.Get(header)
 	if key == "" {
 		return "", false
 	}
@@ -14,11 +17,13 @@ func getKey(headers http.Header) (string, bool) {
 
 func middleware_key(kh keyHandler) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		key, ok := getKey(r.Header)
+		log.Println(r.Method, r.URL.Path)
+		key, ok := get_header(r.Header, "Key")
 		if !ok {
-			respondWithError(w, http.StatusBadRequest, `Provide a non-empty key as the header "Key"`)
+			respondWithError(w, http.StatusBadRequest, "Please provide a key")
 			return
 		}
+		log.Println("Key:", key)
 		kh(w, r, key)
 	}
 }

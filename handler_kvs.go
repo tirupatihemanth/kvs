@@ -1,7 +1,6 @@
 package main
 
 import "net/http"
-
 type KVResponse struct {
 	Result string `json:"result"`
 	Ok     bool   `json:"ok"`
@@ -10,16 +9,34 @@ type KVResponse struct {
 func getKeyHandler(w http.ResponseWriter, r *http.Request, key string) {
 	var resp KVResponse
 	resp.Result, resp.Ok = kvMap.Get(key)
+	if !resp.Ok{
+		respondWithError(w, http.StatusBadRequest, "Key does not exist")
+		return
+	}
 	respondWithJSON(w, http.StatusOK, resp)
 }
 
 func putKeyHandler(w http.ResponseWriter, r *http.Request, key string) {
-	val := r.Header.Get("Val")
-	kvMap.Put(key, val)
-	respondWithJSON(w, http.StatusOK, KVResponse{"", true})
+	val, ok := get_header(r.Header, "Val")
+	if !ok {
+		respondWithError(w, http.StatusBadRequest, "Please provide a value for the key")
+		return
+	}
+	var resp KVResponse
+	resp.Result, resp.Ok = kvMap.Put(key, val)
+	if !resp.Ok{
+		respondWithError(w, http.StatusBadRequest, "Put failed")
+		return
+	}
+	respondWithJSON(w, http.StatusOK, resp)
 }
 
 func delKeyHandler(w http.ResponseWriter, r *http.Request, key string) {
-	kvMap.Del(key)
-	respondWithJSON(w, http.StatusOK, KVResponse{"", true})
+	var resp KVResponse
+	resp.Result, resp.Ok = kvMap.Del(key)
+	if !resp.Ok{
+		respondWithError(w, http.StatusBadRequest, "Key does not exist")
+		return
+	}
+	respondWithJSON(w, http.StatusOK, resp)
 }
