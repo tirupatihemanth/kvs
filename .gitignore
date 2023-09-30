@@ -27,3 +27,6 @@ kvs
 # Go workspace file
 go.work
 .vscode/
+
+# Logging files
+kvsLog.txt
