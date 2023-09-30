@@ -16,6 +16,8 @@ var kvMap *KVMap
 func init() {
 	godotenv.Load(".env")
 	kvMap = &KVMap{make(map[string]string), sync.RWMutex{}}
+	// kvMap.SaveToFile("persist.json")
+	kvMap.LoadFromFile("persist.json")
 }
 
 func main() {
@@ -24,7 +26,8 @@ func main() {
 
 	v1Router := chi.NewRouter()
 	configureRoutes(v1Router)
-	router.Mount("/v1", v1Router)
+	// router.Mount("/v1", v1Router)
+	router.Mount("/", v1Router)
 
 	file, err := os.OpenFile("kvsLog.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0666)
 	if err != nil {
@@ -47,9 +50,12 @@ func main() {
 }
 
 func configureRoutes(v1Router *chi.Mux) {
-	v1Router.Get("/kvs", middleware_key(getKeyHandler))
-	v1Router.Put("/kvs", middleware_key(putKeyHandler))
-	v1Router.Delete("/kvs", middleware_key(delKeyHandler))
+	// v1Router.Get("/kvs", middleware_key(getKeyHandler))
+	// v1Router.Put("/kvs", middleware_key(putKeyHandler))
+	// v1Router.Delete("/kvs", middleware_key(delKeyHandler))
+	v1Router.Get("/", middleware_key(getKeyHandler))
+	v1Router.Put("/", middleware_key(putKeyHandler))
+	v1Router.Delete("/", middleware_key(delKeyHandler))
 }
 
 func configureMiddleware(router *chi.Mux) {
