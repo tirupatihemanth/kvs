@@ -27,11 +27,11 @@ func main() {
 	router.Mount("/v1", v1Router)
 
 	file, err := os.OpenFile("kvsLog.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0666)
-    if err != nil {
-        log.Fatalln(err)
-    }
+	if err != nil {
+		log.Fatalln(err)
+	}
 
-    log.SetOutput(file)
+	log.SetOutput(file)
 
 	port := os.Getenv("PORT")
 	if port == "" {
