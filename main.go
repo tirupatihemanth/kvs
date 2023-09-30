@@ -16,8 +16,8 @@ var kvMap *KVMap
 func init() {
 	godotenv.Load(".env")
 	kvMap = &KVMap{make(map[string]string), sync.RWMutex{}}
-	// kvMap.SaveToFile("persist.json")
-	kvMap.LoadFromFile("persist.json")
+	kvMap.LoadFromFile(PERSIST_FILE_NAME)
+	go scheduleSaving()
 }
 
 func main() {
