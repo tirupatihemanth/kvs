@@ -50,7 +50,6 @@ def client_thread(client_id):
             
             s.sendall(request.encode())
             s.recv(1024)
-            print("here")    
         # End time
         end_time = time.time()
 
