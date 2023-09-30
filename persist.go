@@ -3,7 +3,21 @@ package main
 import (
 	"encoding/json"
 	"os"
+	"time"
 )
+
+const (
+	SCRAPING_INTERVAL = time.Second * 5
+	PERSIST_FILE_NAME = "persist.json"
+)
+
+func scheduleSaving() {
+
+	ticker := time.NewTicker(SCRAPING_INTERVAL)
+	for ; ; <-ticker.C {
+		kvMap.SaveToFile(PERSIST_FILE_NAME)
+	}
+}
 
 func (kvMap *KVMap) SaveToFile(filename string) error {
 	file, err := os.Create(filename)
