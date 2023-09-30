@@ -13,12 +13,13 @@ Assuming the server is running on `localhost:80`. The API is at localhost:80/v1/
 - To insert a new Key, Val pair do: HTTP PUT http://localhost:80/v1/kvs with `Key` as a required Header. Also add `Val` Header for a not default value. Returns a similar json with `ok` is true if insertion succeeds.
 - To delete a Key do: HTTP DEL http://localhost:80/v1/kvs with `Key` as a required Header.  Returns a similar json with `ok` is true if the Key was present and deletion succeeds or the key was just absent. No error thrown if we delete a key that's not present (for Perf).
 - You can use `thunderclient` VSCODE extension or postman for HTTP requests
+- API will log to a file "kvsLog.txt" which will be created.
 
 ## What's done?
 1. Server Implementation
 2. Concurrent Requests
 4. Graceful Error Handling
+5. Logging 
 
 ## TODO
-5. Logging with timestamps is being done only when some error occurs now. Add more logging for various ops like GET/PUT/DEL requests etc., as needed by `#5` in the Assignment description
 3. Persistence for bonus points. That needs to be done.
