@@ -30,3 +30,6 @@ go.work
 
 # Logging files
 kvsLog.txt
+
+# Persistent Storage file
+persist.json
