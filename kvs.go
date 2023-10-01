@@ -7,11 +7,12 @@ type KVMap struct {
 	mu   sync.RWMutex
 }
 
-func (kvs *KVMap) Put(key string, val string) (string, bool){
+func (kvs *KVMap) Put(key string, val string) (string, bool) {
 	kvs.mu.Lock()
 	defer kvs.mu.Unlock()
 	kvs.data[key] = val
 	val, ok := kvs.data[key]
+	// kvMap.SaveToFile("persist.json")
 	return val, ok
 }
 
@@ -22,7 +23,7 @@ func (kvs *KVMap) Get(key string) (string, bool) {
 	return val, ok
 }
 
-func (kvs *KVMap) Del(key string)(string, bool) {
+func (kvs *KVMap) Del(key string) (string, bool) {
 	kvs.mu.Lock()
 	defer kvs.mu.Unlock()
 	val, ok := kvs.data[key]

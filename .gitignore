@@ -27,3 +27,9 @@ kvs
 # Go workspace file
 go.work
 .vscode/
+
+# Logging files
+kvsLog.txt
+
+# Persistent Storage file
+persist.json

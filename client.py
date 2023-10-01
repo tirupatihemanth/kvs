@@ -14,21 +14,42 @@ def client_thread(client_id):
         start_time = time.time()
         
         for i in range(NUM_REQUESTS):
+
+            method = 'PUT'
             key = f"key-{client_id}-{i}"
             value = f"value-{client_id}-{i}"
-        
-            # PUT request
-            s.sendall(f"PUT {key} {value}".encode('utf-8'))
+
+            # PUT Request
+            request = f"{method} / HTTP/1.1\r\n"
+            request += f"Host: {HOST}:{PORT}\r\n"
+            request += f"Key: {key}\r\n"
+            request += f"Val: {value}\r\n"
+            request += "\r\n"
+            
+            s.sendall(request.encode())
             s.recv(1024)
             
             # GET request
-            s.sendall(f"GET {key}".encode('utf-8'))
+            method = 'GET'
+            request = f"{method} / HTTP/1.1\r\n"
+            request += f"Host: {HOST}:{PORT}\r\n"
+            request += f"Key: {key}\r\n"
+            request += f"Val: {value}\r\n"
+            request += "\r\n"
+            
+            s.sendall(request.encode())
             s.recv(1024)
 
             # DEL request
-            s.sendall(f"DEL {key}".encode('utf-8'))
+            method = 'DEL'
+            request = f"{method} / HTTP/1.1\r\n"
+            request += f"Host: {HOST}:{PORT}\r\n"
+            request += f"Key: {key}\r\n"
+            request += f"Val: {value}\r\n"
+            request += "\r\n"
+            
+            s.sendall(request.encode())
             s.recv(1024)
-            print("here")    
         # End time
         end_time = time.time()
 
