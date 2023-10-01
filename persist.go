@@ -15,7 +15,9 @@ func scheduleSaving() {
 
 	ticker := time.NewTicker(SCRAPING_INTERVAL)
 	for ; ; <-ticker.C {
+		kvMap.mu.RLock()
 		kvMap.SaveToFile(PERSIST_FILE_NAME)
+		kvMap.mu.RUnlock()
 	}
 }
 

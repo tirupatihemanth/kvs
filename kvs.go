@@ -9,24 +9,23 @@ type KVMap struct {
 
 func (kvs *KVMap) Put(key string, val string) (string, bool) {
 	kvs.mu.Lock()
-	defer kvs.mu.Unlock()
 	kvs.data[key] = val
 	val, ok := kvs.data[key]
-	// kvMap.SaveToFile("persist.json")
+	kvs.mu.Unlock()
 	return val, ok
 }
 
 func (kvs *KVMap) Get(key string) (string, bool) {
 	kvs.mu.RLock()
-	defer kvs.mu.RUnlock()
 	val, ok := kvs.data[key]
+	kvs.mu.RUnlock()
 	return val, ok
 }
 
 func (kvs *KVMap) Del(key string) (string, bool) {
 	kvs.mu.Lock()
-	defer kvs.mu.Unlock()
 	val, ok := kvs.data[key]
 	delete(kvs.data, key)
+	kvs.mu.Unlock()
 	return val, ok
 }
