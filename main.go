@@ -34,11 +34,12 @@ func main() {
 
 	port := os.Getenv("PORT")
 	if port == "" {
-		log.Fatalln("PORT env variable not set. Create a .env file and put `PORT=\"80\"` inside it")
+		log.Fatalln("PORT env variable not set. Create a .env file and put `PORT=\"65432\"` inside it")
 	}
 
 	log.Println("Starting Server at port", port)
-	err = http.ListenAndServe("127.0.0.1:"+port, router)
+	// 127.0.0.1 will not work on docker
+	err = http.ListenAndServe("0.0.0.0:"+port, router)
 
 	if err != nil {
 		log.Fatalln("Error Starting the server at port %v\n", port)

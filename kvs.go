@@ -25,7 +25,9 @@ func (kvs *KVMap) Get(key string) (string, bool) {
 func (kvs *KVMap) Del(key string) (string, bool) {
 	kvs.mu.Lock()
 	val, ok := kvs.data[key]
-	delete(kvs.data, key)
+	if ok {
+		delete(kvs.data, key)
+	}
 	kvs.mu.Unlock()
 	return val, ok
 }
