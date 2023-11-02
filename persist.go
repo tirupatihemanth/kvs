@@ -7,13 +7,13 @@ import (
 )
 
 const (
-	SCRAPING_INTERVAL = time.Second * 5
+	SAVING_INTERVAL   = time.Second * 5
 	PERSIST_FILE_NAME = "persist.json"
 )
 
 func scheduleSaving() {
 
-	ticker := time.NewTicker(SCRAPING_INTERVAL)
+	ticker := time.NewTicker(SAVING_INTERVAL)
 	for ; ; <-ticker.C {
 		kvMap.mu.RLock()
 		kvMap.SaveToFile(PERSIST_FILE_NAME)

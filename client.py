@@ -2,9 +2,9 @@ import socket
 import time
 import threading
 
-HOST, PORT = '127.0.0.1', 65432
+HOST, PORT = '127.0.0.1', 8080
 NUM_REQUESTS = 1000  # Number of requests to send per client
-NUM_CLIENTS = 10     # Number of concurrent clients
+NUM_CLIENTS = 10    # Number of concurrent clients
 
 def client_thread(client_id):
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
