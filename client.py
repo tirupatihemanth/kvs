@@ -17,15 +17,15 @@ def client_thread(client_id):
         value = f"value-{client_id}-{i}"
 
         # PUT Request
-        data = {'key': key, 'val': value}
-        response = session.put(f"{HOST}:{PORT}/{key}", data=data)
+        data = {'Key': key, 'Val': value}
+        response = session.put(f"{HOST}:{PORT}", headers=data)
 
         # GET request
-        response = session.get(f"{HOST}:{PORT}/{key}")
-
+        response = session.get(f"{HOST}:{PORT}", headers=data)
+        print(response.text)
         # DEL request
-        response = session.delete(f"{HOST}:{PORT}/{key}")
-
+        response = session.delete(f"{HOST}:{PORT}", headers=data)
+        print(response.text)
     # End time
     end_time = time.time()
 

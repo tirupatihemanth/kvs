@@ -25,17 +25,16 @@ func main() {
 	configureMiddleware(router)
 	configureRoutes(router)
 
-	file, err := os.OpenFile("kvsLog.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0666)
+	port := os.Getenv("PORT")
+	if port == "" {
+		log.Fatalln("PORT env variable not set. Create a .env file and put `PORT=\"65432\"` inside it")
+	}
+	file, err := os.OpenFile("kvsLog"+"_"+port+".txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0666)
 	if err != nil {
 		log.Fatalln(err)
 	}
 
 	log.SetOutput(file)
-
-	port := os.Getenv("PORT")
-	if port == "" {
-		log.Fatalln("PORT env variable not set. Create a .env file and put `PORT=\"65432\"` inside it")
-	}
 
 	log.Println("Starting Server at port", port)
 	// 127.0.0.1 will not work on docker
