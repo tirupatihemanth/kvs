@@ -17,7 +17,7 @@ func init() {
 	godotenv.Load(".env")
 	kvMap = &KVMap{make(map[string]string), sync.RWMutex{}}
 	kvMap.LoadFromFile(PERSIST_FILE_NAME)
-	go scheduleSaving()
+	//go scheduleSaving()
 }
 
 func main() {
