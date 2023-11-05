@@ -9,7 +9,7 @@ done
 sleep 1
 python client.py
 
-con_ids = $(docker ps -q)
-for con_id in $con_ids
+con_ids=$(docker ps -q)
+for con_id in $con_ids; do
     docker stop "$con_id"
 done
