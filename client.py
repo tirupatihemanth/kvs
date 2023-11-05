@@ -22,10 +22,10 @@ def client_thread(client_id):
 
         # GET request
         response = session.get(f"{HOST}:{PORT}", headers=data)
-        print(response.text)
+        #print(response.text)
         # DEL request
         response = session.delete(f"{HOST}:{PORT}", headers=data)
-        print(response.text)
+        #print(response.text)
     # End time
     end_time = time.time()
 
