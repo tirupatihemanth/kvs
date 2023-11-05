@@ -7,6 +7,8 @@ RUN go mod download
 # Get all socurce code in this layer.
 COPY *.go client.py ./
 RUN CGO_ENABLED=0 GOOS=linux go build -o kvs
+ENV PORT 8080
+EXPOSE 8080
 
 # Command that will be executed on docker run
 CMD ["./kvs"]

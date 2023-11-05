@@ -3,7 +3,7 @@ import time
 import threading
 import sys
 
-HOST, PORT = 'http://localhost', 8080  
+HOST, PORT = 'http://localhost', 80
 NUM_REQUESTS = int(sys.argv[1])  # Number of requests to send per client
 NUM_CLIENTS = int(sys.argv[2])  # Number of concurrent clients
 

@@ -26,6 +26,7 @@ func main() {
 	configureRoutes(router)
 
 	port := os.Getenv("PORT")
+	// port := "8080"
 	if port == "" {
 		log.Fatalln("PORT env variable not set. Create a .env file and put `PORT=\"65432\"` inside it")
 	}
