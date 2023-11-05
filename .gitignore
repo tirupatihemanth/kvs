@@ -29,7 +29,7 @@ go.work
 .vscode/
 
 # Logging files
-kvsLog.txt
+kvsLog*.txt
 
 # Persistent Storage file
 persist.json

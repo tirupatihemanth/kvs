@@ -3,8 +3,8 @@ import time
 import threading
 
 HOST, PORT = 'http://localhost', 8080  
-NUM_REQUESTS = 5000  # Number of requests to send per client
-NUM_CLIENTS = 10  # Number of concurrent clients
+NUM_REQUESTS = 12000  # Number of requests to send per client
+NUM_CLIENTS = 1  # Number of concurrent clients
 
 def client_thread(client_id):
     session = requests.Session()
