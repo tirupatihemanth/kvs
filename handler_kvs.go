@@ -7,6 +7,7 @@ type KVResponse struct {
 	Ok     bool   `json:"ok"`
 }
 
+// Handles Get Key requests
 func getKeyHandler(w http.ResponseWriter, r *http.Request, key string) {
 	var resp KVResponse
 	resp.Result, resp.Ok = kvMap.Get(key)
@@ -18,6 +19,7 @@ func getKeyHandler(w http.ResponseWriter, r *http.Request, key string) {
 	respondWithJSON(w, http.StatusOK, resp)
 }
 
+// Handles Put Key requests
 func putKeyHandler(w http.ResponseWriter, r *http.Request, key string) {
 	val, ok := get_header(r.Header, "Val")
 	if !ok {
@@ -34,6 +36,7 @@ func putKeyHandler(w http.ResponseWriter, r *http.Request, key string) {
 	respondWithJSON(w, http.StatusOK, resp)
 }
 
+// Handles Del Key requets.
 func delKeyHandler(w http.ResponseWriter, r *http.Request, key string) {
 	var resp KVResponse
 	resp.Result, resp.Ok = kvMap.Del(key)
