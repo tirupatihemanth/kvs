@@ -6,6 +6,8 @@ import sys
 HOST, PORT = 'http://localhost', 80
 NUM_REQUESTS = int(sys.argv[1])  # Number of requests to send per client
 NUM_CLIENTS = int(sys.argv[2])  # Number of concurrent clients
+tp = []
+ly = []
 
 def client_thread(client_id):
     session = requests.Session()
@@ -33,6 +35,8 @@ def client_thread(client_id):
     elapsed_time = end_time - start_time
     throughput = NUM_REQUESTS * 3 / elapsed_time  # Multiply by 3 for PUT, GET, DEL
     latency = elapsed_time / (NUM_REQUESTS * 3)  # Average latency per request
+    tp.append(throughput)
+    ly.append(latency);
 
     print(f"Client-{client_id} | Throughput: {throughput:.2f} req/s | Average Latency: {latency:.6f} seconds")
 
@@ -46,4 +50,6 @@ if __name__ == "__main__":
     for t in clients:
         t.join()
 
+    print("Total throughput(req/s): ", sum(tp))
+    print("Total latency(ms): ", sum(ly)*1000/len(ly))
     print("Testing completed.")
