@@ -11,6 +11,7 @@ const (
 	PERSIST_FILE_NAME = "persist.json"
 )
 
+// Saves Key Value dictionary every 5 seconds to a file.
 func scheduleSaving() {
 
 	ticker := time.NewTicker(SAVING_INTERVAL)
@@ -36,6 +37,7 @@ func (kvMap *KVMap) SaveToFile(filename string) error {
 	return nil
 }
 
+// Loads Key Value Dictionary from a file on application startup
 func (kvMap *KVMap) LoadFromFile(filename string) error {
 	file, err := os.Open(filename)
 	if err != nil {

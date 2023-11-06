@@ -36,7 +36,7 @@ def client_thread(client_id):
     throughput = NUM_REQUESTS * 3 / elapsed_time  # Multiply by 3 for PUT, GET, DEL
     latency = elapsed_time / (NUM_REQUESTS * 3)  # Average latency per request
     tp.append(throughput)
-    ly.append(latency);
+    ly.append(latency)
 
     print(f"Client-{client_id} | Throughput: {throughput:.2f} req/s | Average Latency: {latency:.6f} seconds")
 

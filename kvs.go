@@ -7,6 +7,8 @@ type KVMap struct {
 	mu   sync.RWMutex
 }
 
+// Functions to access Dictionary underlying KV Store
+
 func (kvs *KVMap) Put(key string, val string) (string, bool) {
 	kvs.mu.Lock()
 	kvs.data[key] = val
