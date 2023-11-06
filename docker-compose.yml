@@ -20,6 +20,6 @@ services:
   nginx:
     image: nginx:latest
     volumes:
-      - ./conf.d/nginx.conf:/etc/nginx/nginx.conf
+      - ./conf.d/nginx.conf:/etc/nginx/nginx.conf #copy the conf file to the Nginx container
     ports:
-      - 80:80
+      - 80:80 #map local host port 80 to port 80 within the Nginx container
