@@ -13,10 +13,10 @@ services:
     build: .
     ports: 
       - 8080
-  api4:
-    build: .
-    ports: 
-      - 8080
+  # api4:
+  #   build: .
+  #   ports: 
+  #     - 8080
   nginx:
     image: nginx:latest
     volumes:
