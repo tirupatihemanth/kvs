@@ -1,15 +1,18 @@
 # Key-Value Store (KVS)
 - Highly Scalable Distributed Key Value Store in Go
 
-## Docker Setup
-1. If you have access to code build the image first and run as described below. 
-2. Alpine is much lighter but the base isn't very stable according to official golang docker hub. But our code works fine on both. By default let's use the heavier one as recommended by official documentation.
-3. If you just want to run/use the application then take the dockerhub route
-
 ### Docker Compose
 1. To scale key value store across multiple nodes.
 2. docker-compose up => builds kv store and nginx images and runs them.
 2. docker-compose down => terminates all the running docker containers.
+
+## To RUN
+1. python client.py #Req #Clients
+
+## Docker Setup
+1. If you have access to code build the image first and run as described below. 
+2. Alpine is much lighter but the base isn't very stable according to official golang docker hub. But our code works fine on both. By default let's use the heavier one as recommended by official documentation.
+3. If you just want to run/use the application then take the dockerhub route
 
 ### Build
 1. docker build --tag docker-kvs:v1.0 . 
