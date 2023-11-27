@@ -32,6 +32,11 @@ func main() {
 
 	port := os.Getenv("PORT")
 
+	// Override env port if command line argument is given.
+	if len(os.Args) > 1 {
+		port = os.Args[1]
+	}
+
 	if port == "" {
 		log.Fatalln("PORT env variable not set. Create a .env file and put `PORT=\"8080\"` inside it")
 	}
